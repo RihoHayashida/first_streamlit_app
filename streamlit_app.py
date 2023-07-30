@@ -1,3 +1,12 @@
+ # リクエスト：https://docs.python-requests.org/en/latest/
+# リクエストを使用すると、HTTP/1.1 リクエストを非常に簡単に送信できます。
+# URL にクエリ文字列を手動で追加したり、POST データをフォーム エンコードしたりする必要はありません。
+import reqests;
+Fruityvice_response =requests.get("https://fruityvice.com/api/fruit/watermelon") 
+streamlit.header("Fruityvice Fruit Advice!")
+streamlit.text(fruityvice_response)
+streamlit.text(fruityvice_response.jspn())
+
 import streamlit
 import pandas
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
