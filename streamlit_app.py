@@ -1,3 +1,7 @@
+# requirements.txtファイルは、プロジェクトで使用する予定のライブラリをStreamlitに伝え、事前にライブラリを追加できるようにします。
+# 以下に示す行は、プロジェクトに追加したライブラリを使用するように py ファイルに指示します。 
+import snowflake connector
+
 import streamlit
 import pandas
 
