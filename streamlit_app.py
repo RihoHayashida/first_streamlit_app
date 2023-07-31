@@ -38,8 +38,14 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 # ページにテーブルを表示します。
 streamlit.dataframe(fruits_to_show)
-
 streamlit.header("Fruityvice Fruit Advice!")
+
+def get_fruityvice_data(this_fruit_choise):
+  # fruityviceからJSONデータを取得して使用
+  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+  # jsonデータを正規化
+  fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+  return fruityvice_normalized
 
 try:
   # テキスト入力
@@ -47,14 +53,11 @@ try:
   if not fruit_choice:
     streamlit.error("Please enter a fruit name.")
   else:
-    # fruityviceからJSONデータを取得して使用
-    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-    # jsonデータを正規化
-    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-    # 正規化されたjsonデータでテーブルを作成
-    streamlit.dataframe(fruityvice_normalized)
     # テキスト表示
     streamlit.write('The user entered ', fruit_choice)
+    # 正規化されたjsonデータでテーブルを作成
+    back_from_function = get_fruityvice_data(fruit_choice)
+    streamlit.dataframe(back_from_function)
 except URLError as e:
   streamlit.error()
 
