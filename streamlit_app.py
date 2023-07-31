@@ -28,21 +28,19 @@ streamlit.dataframe(fruits_to_show)
 
 streamlit.header("Fruityvice Fruit Advice!")
 
-# text input
+# テキスト入力
 fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
 streamlit.write('The user entered ', fruit_choice)
 
 #############################################################################################################################
 
+# fruityviceからJSONデータを取得して使用
 # リクエスト：https://docs.python-requests.org/en/latest/
 # リクエストを使用すると、HTTP/1.1 リクエストを非常に簡単に送信できます。
 # URL にクエリ文字列を手動で追加したり、POST データをフォーム エンコードしたりする必要はありません。
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
 
-#############################################################################################################################
-
-# use json data
 # normalize json data
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # create table by use normalized json data
@@ -71,6 +69,11 @@ streamlit.header("The fruit load list contains: ")
 
 # streamlit.text(my_data_row)
 streamlit.dataframe(my_data_row)
+
+# テキスト入力
+add_my_fruit = streamlit.text_input('What fruit would you like add?','Apple')
+# my_cur.execute("select * from fruit_load_list")
+streamlit.text("thanks for adding", add_my_fruit)
 
 #############################################################################################################################
 
