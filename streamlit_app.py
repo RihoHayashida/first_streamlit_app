@@ -43,10 +43,9 @@ streamlit.header("Fruityvice Fruit Advice!")
 
 try:
   # テキスト入力
-  # fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
-  fruit_choice = streamlit.text_input('What fruit would you like information about?')
+  fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
   if not fruit_choice:
-    streamlit.error("Please select a fruit")
+    streamlit.error("Please enter a fruit name.")
   else:
     # fruityviceからJSONデータを取得して使用
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
