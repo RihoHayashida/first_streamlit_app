@@ -73,7 +73,7 @@ streamlit.dataframe(my_data_row)
 # テキスト入力
 add_my_fruit = streamlit.text_input('What fruit would you like add?','Apple')
 # my_cur.execute("select * from fruit_load_list")
-streamlit.text("thanks for adding", add_my_fruit)
+streamlit.write("thanks for adding", add_my_fruit)
 
 #############################################################################################################################
 
