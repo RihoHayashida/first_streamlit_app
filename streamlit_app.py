@@ -41,19 +41,23 @@ streamlit.dataframe(fruits_to_show)
 
 streamlit.header("Fruityvice Fruit Advice!")
 
-# テキスト入力
-fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
-streamlit.write('The user entered ', fruit_choice)
-
-#############################################################################################################################
-
-# fruityviceからJSONデータを取得して使用
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-
-# normalize json data
-fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-# create table by use normalized json data
-streamlit.dataframe(fruityvice_normalized)
+try:
+  # テキスト入力
+  # fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
+  fruit_choice = streamlit.text_input('What fruit would you like information about?')
+  if not fruit_choice:
+    streamlit.error("Please select a fruit")
+  else:
+    # fruityviceからJSONデータを取得して使用
+    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+    # jsonデータを正規化
+    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+    # 正規化されたjsonデータでテーブルを作成
+    streamlit.dataframe(fruityvice_normalized)
+    # テキスト表示
+    streamlit.write('The user entered ', fruit_choice)
+except URLError as e:
+  streamlit.error()
 
 # streamlit.text(fruityvice_response)
 # streamlit.text(fruityvice_response.json())
