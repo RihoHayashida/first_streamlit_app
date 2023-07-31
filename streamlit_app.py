@@ -1,7 +1,3 @@
-# requirements.txtファイルは、プロジェクトで使用する予定のライブラリをStreamlitに伝え、事前にライブラリを追加できるようにします。
-# 以下に示す行は、プロジェクトに追加したライブラリを使用するように py ファイルに指示します。 
-import snowflake.connector
-
 import streamlit
 import pandas
 
@@ -9,6 +5,10 @@ import pandas
 # リクエストを使用すると、HTTP/1.1 リクエストを非常に簡単に送信できます。
 # URL にクエリ文字列を手動で追加したり、POST データをフォーム エンコードしたりする必要はありません。
 import requests
+
+# requirements.txtファイルは、プロジェクトで使用する予定のライブラリをStreamlitに伝え、事前にライブラリを追加できるようにします。
+# 以下に示す行は、プロジェクトに追加したライブラリを使用するように py ファイルに指示します。 
+import snowflake.connector
 
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index('Fruit')
