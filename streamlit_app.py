@@ -1,9 +1,21 @@
 import streamlit
+import pandas
+
+# fruityviceからJSONデータを取得して使用
+# リクエスト：https://docs.python-requests.org/en/latest/
+# リクエストを使用すると、HTTP/1.1 リクエストを非常に簡単に送信できます。
+# URL にクエリ文字列を手動で追加したり、POST データをフォーム エンコードしたりする必要はありません。
+import requests
+
+# connect to snowflake
+# requirements.txtファイルは、プロジェクトで使用する予定のライブラリをStreamlitに伝え、事前にライブラリを追加できるようにします。
+# 以下に示す行は、プロジェクトに追加したライブラリを使用するように py ファイルに指示します。 
+import snowflake.connector
+
 from urlib.error import URLError
 
 #############################################################################################################################
 
-import pandas
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index('Fruit')
 
@@ -36,10 +48,6 @@ streamlit.write('The user entered ', fruit_choice)
 #############################################################################################################################
 
 # fruityviceからJSONデータを取得して使用
-# リクエスト：https://docs.python-requests.org/en/latest/
-# リクエストを使用すると、HTTP/1.1 リクエストを非常に簡単に送信できます。
-# URL にクエリ文字列を手動で追加したり、POST データをフォーム エンコードしたりする必要はありません。
-import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
 
 # normalize json data
@@ -53,9 +61,6 @@ streamlit.dataframe(fruityvice_normalized)
 #############################################################################################################################
 
 # connect to snowflake
-# requirements.txtファイルは、プロジェクトで使用する予定のライブラリをStreamlitに伝え、事前にライブラリを追加できるようにします。
-# 以下に示す行は、プロジェクトに追加したライブラリを使用するように py ファイルに指示します。 
-import snowflake.connector
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
