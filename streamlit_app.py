@@ -12,7 +12,7 @@ import requests
 # 以下に示す行は、プロジェクトに追加したライブラリを使用するように py ファイルに指示します。 
 import snowflake.connector
 
-from urlib.error import URLError
+from urllib.error import URLError
 
 #############################################################################################################################
 
